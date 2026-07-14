@@ -1,0 +1,98 @@
+{
+  "am": {
+    "details": [
+      "Bike: Z2 145W/134bpm ×15min → Z3 165W/146bpm ×6 → Z2 ×6 → Z3 ×6 → Z2 ×17min",
+      "Run (brick): Z2 15min, 6.4km/h, 151W/126bpm."
+    ],
+    "label": "AM",
+    "title": "2peak CYCLING/RUNNING brick, 65 min"
+  },
+  "brief": "TODAY:\nAM — 2peak CYCLING/RUNNING brick, 65 min. Bike: Z2 145W/134bpm ×15min → Z3 165W/146bpm ×6 → Z2 ×6 → Z3 ×6 → Z2 ×17min. Run (brick): Z2 15min, 6.4km/h, 151W/126bpm.\nPM — MTI GenX Session 50: Bench Press Assessment. 3 warm-up rounds (8x, ascending load) → work up to 1RM bench (compare vs. Sessions 2 & 23).\n\nSLEEP (night of 7/5→7/6): 7.1h total — Deep 47min, REM 111min, Core 268min, Awake 12min.\n\nHRV / RHR: 27ms SDNN (rebounded off a 4-day dip: 27.6→26.1→25.9→25.0→27) | RHR 64bpm\n\nWEIGHT: 205.25 lbs | 33.75 lbs down since Jan (239→205.25) | 15.25 lbs to 190 (cardio intensify) | 25.25 lbs to 180 (triathlon focus)\n\nNUTRITION (2026-07-05): 948 cal | 49.5g protein | 105.9g carbs | 35.7g fat\n\nRECOMMENDATION: Yellow: HRV/RHR/sleep all support a normal training day, but yesterday's intake (948 cal, 49.5g protein) is well short of what a bench 1RM assessment needs — eat a real meal with 30g+ protein before the PM session or expect the strength number to undersell your actual capacity.\n\nNOTES: Strava has no synced activities since 2026-06-18 (18-day gap), so recent MTI/2peak completion can't be verified from that source — worth checking Garmin sync. HRV's 4-day downtrend just reversed today; keep an eye on tomorrow's reading to confirm it's not fatigue building back up.",
+  "calendarDays": [
+    {
+      "am": "Recovery",
+      "date": "2026-07-04T01:57:05Z",
+      "pm": "Rest"
+    },
+    {
+      "am": "Recovery",
+      "date": "2026-07-05T01:57:05Z",
+      "pm": "Rest"
+    },
+    {
+      "am": "Recovery",
+      "date": "2026-07-06T01:57:05Z",
+      "pm": "Rest"
+    },
+    {
+      "am": "Cycling 1h 5m",
+      "date": "2026-07-07T01:57:05Z",
+      "pm": "Rest"
+    },
+    {
+      "am": "Cycling 1h 5m",
+      "date": "2026-07-08T01:57:05Z",
+      "pm": "Rest"
+    },
+    {
+      "am": "Running 1h 5m",
+      "date": "2026-07-09T01:57:05Z",
+      "pm": "Rest"
+    },
+    {
+      "am": "Recovery",
+      "date": "2026-07-10T01:57:05Z",
+      "pm": "Rest"
+    }
+  ],
+  "date": "2026-07-07T01:57:08Z",
+  "phase": "Recovery day in the Polar X schedule",
+  "pm": {
+    "details": [
+      "3 warm-up rounds (8x, ascending load) → work up to 1RM bench (compare vs. Sessions 2 & 23)."
+    ],
+    "label": "PM",
+    "title": "MTI GenX Session 50: Bench Press Assessment"
+  },
+  "recentLoad": "0 activities in 7 days\nRecent activity details are available after the next Strava sync.",
+  "recovery": [
+    "Health export loaded",
+    "HRV: 27 ms",
+    "Resting HR: 64 count/min",
+    "Heart Rate: avg 74.97, min 63, max 111 count/min",
+    "Sleep: 7.10 hr total, 0.78 deep, 1.85 REM",
+    "Weight: 205.2 lb",
+    "Active Energy: 213 kcal",
+    "Steps: 1581 count",
+    "Walk/Run Distance: 1.52 mi",
+    "Dietary Energy: 948.1 kcal",
+    "Protein: 49.52 g",
+    "Carbohydrates: 105.9 g",
+    "Total Fat: 35.69 g",
+    "Basal Energy Burned: 1422 kcal",
+    "Body Fat Percentage: 0 %",
+    "Body Mass Index: 29.40 count",
+    "Calcium: 84.76 mg",
+    "Cholesterol: 300.2 mg",
+    "Dietary Sugar: 10.47 g",
+    "Fiber: 8.09 g",
+    "Flights Climbed: 17.74 count",
+    "Headphone Audio Exposure: 65.23 dBASPL",
+    "Iron: 22.43 mg",
+    "Monounsaturated Fat: 9.85 g",
+    "Polyunsaturated Fat: 3.41 g",
+    "Potassium: 513.5 mg",
+    "Saturated Fat: 11.49 g",
+    "Sodium: 2760.0 mg",
+    "VO2 Max: 34 ml/(kg·min)",
+    "Vitamin C: 1671.8 mg",
+    "Walking Asymmetry Percentage: 5 %",
+    "Walking Double Support Percentage: 32 %",
+    "Walking Speed: 1.98 mi/hr",
+    "Walking Step Length: 20.34 in",
+    "Medications: 71 scheduled entries"
+  ],
+  "signal": "yellow",
+  "signalReason": "HRV/RHR/sleep all support a normal training day, but yesterday's intake (948 cal, 49.5g protein) is well short of what a bench 1RM assessment needs — eat a real meal with 30g+ protein before the PM session or expect the strength number to undersell your actual capacity. NOTES: Strava has no synced activities since 2026-06-18 (18-day gap), so recent MTI/2peak completion can't be verified from that source — worth checking Garmin sync. HRV's 4-day downtrend just reversed today; keep an eye on tomorrow's reading to confirm it's not fatigue building back up.",
+  "weightLine": "205.2 lb | 33.8 down, 15.2 to 190, 25.2 to 180"
+}

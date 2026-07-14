@@ -1,0 +1,23 @@
+.DS_Store
+
+# Swift Package Manager
+.build/
+.swiftpm/
+
+# Xcode
+DerivedData/
+*.xcuserstate
+xcuserdata/
+*.moved-aside
+*.xccheckout
+*.xcscmblueprint
+
+# App/build outputs
+*.app/
+*.ipa
+*.dSYM/
+build/
+
+# Local generated data
+polar_coach_snapshot.local.json
+
