@@ -738,6 +738,7 @@ struct TrainingDataLoader {
 
     private func loadStravaSummary() -> (title: String, detail: String) {
         let url = syncDirectory.appendingPathComponent("strava_activities.json")
+        let modifiedAt = try? url.resourceValues(forKeys: [.contentModificationDateKey]).contentModificationDate
         guard
             let data = try? Data(contentsOf: url),
             let raw = try? JSONSerialization.jsonObject(with: data) as? [[String: Any]]
@@ -746,10 +747,25 @@ struct TrainingDataLoader {
         }
 
         let cutoff = calendar.date(byAdding: .day, value: -7, to: Date()) ?? Date()
+        let staleCutoff = calendar.date(byAdding: .hour, value: -24, to: Date()) ?? Date()
         let recent = raw.filter { item in
             let value = (item["start_date_local"] ?? item["start_date"]) as? String
             guard let value, let date = Self.flexDate(value) else { return false }
             return date >= cutoff
+        }
+
+        if recent.isEmpty, let modifiedAt, modifiedAt < staleCutoff {
+            let latestActivity = raw
+                .compactMap { ($0["start_date_local"] ?? $0["start_date"]) as? String }
+                .compactMap(Self.flexDate)
+                .max()
+            let latestText = latestActivity.map {
+                "Latest activity in file: \($0.formatted(date: .abbreviated, time: .omitted))."
+            } ?? "No dated activities found in file."
+            return (
+                "Strava sync stale",
+                "Last Strava file update: \(modifiedAt.formatted(date: .abbreviated, time: .shortened)).\n\(latestText)\nRun Strava sync to pull recent workouts."
+            )
         }
 
         let names = recent.prefix(4).compactMap { $0["name"] as? String }

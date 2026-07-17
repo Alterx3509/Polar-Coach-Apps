@@ -18,6 +18,10 @@ The apps expect Patrick's local training exports and generated files to live out
 
 Those data files are intentionally not committed here.
 
+## Sync Scripts
+
+- `strava_sync.py` refreshes `~/Documents/Garmin/sync/strava_activities.json` from the Strava REST API. The macOS app's Strava sync button expects the runnable copy at `~/strava_sync.py`.
+
 ## Build
 
 macOS:
@@ -30,4 +34,3 @@ swift build
 iOS:
 
 Open `iOS/PolarCoachiOS.xcodeproj` in Xcode and build/run the `PolarCoachiOS` target.
-
