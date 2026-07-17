@@ -18,7 +18,7 @@ final class TrainingStore: ObservableObject {
         }
         snapshot = loaded.snapshot
         lastUpdated = loaded.modifiedAt ?? Date()
-        importStatus = "Loaded \(loaded.url.lastPathComponent)"
+        importStatus = loaded.statusText
     }
 
     func importBrief(from url: URL) {
@@ -45,7 +45,7 @@ final class TrainingStore: ObservableObject {
         guard let loaded = SharedSnapshotReader.loadNewestAvailable() else { return }
         snapshot = loaded.snapshot
         lastUpdated = loaded.modifiedAt ?? Date()
-        importStatus = "Loaded \(loaded.url.lastPathComponent)"
+        importStatus = loaded.statusText
     }
 }
 
@@ -54,17 +54,34 @@ enum SharedSnapshotReader {
         let snapshot: TrainingSnapshot
         let url: URL
         let modifiedAt: Date?
+        let isBundledFallback: Bool
+
+        var statusText: String {
+            if isBundledFallback {
+                return "Loaded bundled fallback snapshot"
+            }
+            return "Loaded \(url.lastPathComponent)"
+        }
     }
 
     static func loadNewestAvailable() -> Loaded? {
-        let loaded = candidateURLs.compactMap { url -> Loaded? in
+        let loaded = candidateURLs.compactMap { candidate -> Loaded? in
+            let url = candidate.url
             guard FileManager.default.fileExists(atPath: url.path),
                   let snapshot = try? decode(from: url) else {
                 return nil
             }
             let modifiedAt = try? url.resourceValues(forKeys: [.contentModificationDateKey]).contentModificationDate
-            return Loaded(snapshot: snapshot, url: url, modifiedAt: modifiedAt)
+            return Loaded(snapshot: snapshot, url: url, modifiedAt: modifiedAt, isBundledFallback: candidate.isBundledFallback)
         }
+
+        let shared = loaded.filter { !$0.isBundledFallback }
+        if !shared.isEmpty {
+            return shared.max { lhs, rhs in
+                (lhs.modifiedAt ?? .distantPast) < (rhs.modifiedAt ?? .distantPast)
+            }
+        }
+
         return loaded.max { lhs, rhs in
             (lhs.modifiedAt ?? .distantPast) < (rhs.modifiedAt ?? .distantPast)
         }
@@ -77,19 +94,24 @@ enum SharedSnapshotReader {
         return try decoder.decode(TrainingSnapshot.self, from: data)
     }
 
-    private static var candidateURLs: [URL] {
-        var urls: [URL] = []
+    private struct Candidate {
+        let url: URL
+        let isBundledFallback: Bool
+    }
+
+    private static var candidateURLs: [Candidate] {
+        var urls: [Candidate] = []
 
         if let iCloud = FileManager.default.url(forUbiquityContainerIdentifier: nil) {
-            urls.append(iCloud.appendingPathComponent("Documents/polar_coach_snapshot.json"))
+            urls.append(Candidate(url: iCloud.appendingPathComponent("Documents/polar_coach_snapshot.json"), isBundledFallback: false))
         }
 
         if let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-            urls.append(documents.appendingPathComponent("polar_coach_snapshot.json"))
+            urls.append(Candidate(url: documents.appendingPathComponent("polar_coach_snapshot.json"), isBundledFallback: false))
         }
 
         if let bundled = Bundle.main.url(forResource: "polar_coach_snapshot", withExtension: "json") {
-            urls.append(bundled)
+            urls.append(Candidate(url: bundled, isBundledFallback: true))
         }
 
         return urls
