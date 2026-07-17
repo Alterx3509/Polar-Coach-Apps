@@ -101,7 +101,8 @@ struct DailyCoachBuilder {
         let recovery = recoverySummary(sleep: sleep, hrv: hrv, hrvBaseline: hrvBaseline, restingHR: restingHR, restingBaseline: restingBaseline)
         let fueling = fuelingSummary(protein: protein, calories: calories, calorieBaseline: calorieBaseline)
         let reason = recommendationReason(severe: severe, warnings: warnings, missingInputs: missingInputs)
-        let weightLine = weight?.quantityValue.map { "Weight: \($0.oneDecimal) \(export.metric(\"weight_body_mass\")?.units ?? \"lb\")" } ?? "Weight unavailable"
+        let weightUnits = export.metric("weight_body_mass")?.units ?? "lb"
+        let weightLine = weight?.quantityValue.map { "Weight: \($0.oneDecimal) \(weightUnits)" } ?? "Weight unavailable"
 
         return DailyCoach(
             signal: recommendation.signal,
