@@ -30,9 +30,9 @@ enum TrainingSignal: String, Codable {
     var guidance: String {
         switch self {
         case .red:
-            return "Recovery priority"
+            return "Rest or active recovery"
         case .yellow:
-            return "Modify training"
+            return "Train, but reduce volume"
         case .green:
             return "Train as planned"
         }
@@ -87,42 +87,35 @@ struct TrainingSnapshot: Codable {
     var brief: String
 
     static let empty: TrainingSnapshot = {
-        let calendar = Calendar.current
         let today = Date()
-        let days = (-3...3).compactMap { offset -> TrainingDay? in
-            guard let date = calendar.date(byAdding: .day, value: offset, to: today) else { return nil }
-            let text = calendar.isDateInToday(date) ? "Import brief" : "No imported plan"
-            return TrainingDay(date: date, am: text, pm: text)
-        }
 
         return TrainingSnapshot(
             date: today,
             signal: .yellow,
-            signalReason: "Import today's Mac brief or connect Apple Health before using this as guidance.",
-            phase: "Waiting for today's sync",
-            weightLine: "No current weight imported",
+            signalReason: "Import the Health Export snapshot before using this as training guidance.",
+            phase: "Low confidence · Health Export needed",
+            weightLine: "Weight unavailable",
             am: WorkoutSummary(
-                label: "AM",
-                title: "No imported AM workout",
+                label: "TODAY",
+                title: "Health Export needed",
                 details: [
-                    "Import today's Mac brief to show the current plan."
+                    "Refresh the Mac app after adding a HealthAutoExport JSON file."
                 ]
             ),
             pm: WorkoutSummary(
-                label: "PM",
-                title: "No imported PM workout",
+                label: "ADJUST",
+                title: "Recommendation unavailable",
                 details: [
-                    "Import today's Mac brief to show the current plan."
+                    "No training adjustment can be calculated yet."
                 ]
             ),
             recovery: [
-                "No current recovery data imported"
+                "Unknown",
+                "No recovery data loaded."
             ],
-            recentLoad: "No current load data imported",
-            calendarDays: days,
-            brief: """
-            Import today's Mac brief to replace this placeholder.
-            """
+            recentLoad: "Unknown\nNo fueling data loaded.",
+            calendarDays: [],
+            brief: "The app is waiting for the shared Health Export snapshot from your Mac."
         )
     }()
 }
