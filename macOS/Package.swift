@@ -10,6 +10,9 @@ let package = Package(
         .executable(name: "PolarCoachMac", targets: ["PolarCoachMac"])
     ],
     targets: [
-        .executableTarget(name: "PolarCoachMac")
+        .executableTarget(
+            name: "PolarCoachMac",
+            path: "Sources/PolarCoachSimple"
+        )
     ]
 )
